@@ -29,19 +29,23 @@ struct timespec __tests_concluded;
 
 #define __EXPAND(x) #x
 
-#define __TEST_EMPTY \
+#define __TEST_EMPTY do { \
     printf(" %s%s%s\n", __COLOR_BG_YELLOW, " No Assertions Made ", __COLOR_RESET); \
-    return EXIT_SUCCESS; // Assume success since it's a warning
+    return EXIT_SUCCESS; /* Assume success since it's a warning */ \
+    } while (0)
 
-#define __TEST_PASSED \
+#define __TEST_PASSED do { \
     printf(" %s%s%s\n", __COLOR_BG_GREEN, " OK ", __COLOR_RESET); \
-    return EXIT_SUCCESS;
+    return EXIT_SUCCESS; \
+    } while (0)
 
-#define __TRY_ASSERT(block) \
+#define __TRY_ASSERT(block) do { \
     __assertions_attempted++; \
     block \
-    __assertions_succeeded++;
+    __assertions_succeeded++; \
+    } while (0)
 
-#define __ASSERTION_FAILED \
+#define __ASSERTION_FAILED do { \
     puts(""); \
-    return EXIT_FAILURE;
+    return EXIT_FAILURE; \
+    } while (0)

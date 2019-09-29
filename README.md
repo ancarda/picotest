@@ -30,13 +30,13 @@ IT_SHOULD(fail, {
 
 int main()
 {
-    BEGIN_TESTING
+    BEGIN_TESTING;
 
-    RUN_TEST(do_nothing)
-    RUN_TEST(pass)
-    RUN_TEST(fail)
+    RUN_TEST(do_nothing);
+    RUN_TEST(pass);
+    RUN_TEST(fail);
 
-    CONCLUDE_TESTING
+    CONCLUDE_TESTING;
 }
 ```
 

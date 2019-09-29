@@ -13,11 +13,12 @@
 // This should be at the start of your main function.
 // Right now it just prints the PicoTest header, but could in the future
 // be used to do some setup.
-#define BEGIN_TESTING \
+#define BEGIN_TESTING do { \
     puts("PicoTest"); \
     puts("========"); \
     puts(""); \
-    clock_gettime(CLOCK_MONOTONIC, &__tests_began);
+    clock_gettime(CLOCK_MONOTONIC, &__tests_began); \
+    } while (0)
 
 // Defines a new test. Provide the test name, and a body (use curly braces).
 // The body should contain one or more ASSERT_xxx calls.
@@ -34,13 +35,14 @@
 
 // This should be used after BEGIN_TESTING in main().
 // The name is the same as you provided to IT_SHOULD.
-#define RUN_TEST(test_name) \
+#define RUN_TEST(test_name) do { \
     it_should_##test_name(); \
-    __tests_run++;
+    __tests_run++; \
+    } while (0)
 
 // This should be used after all RUN_TEST calls in main().
 // It prints the overall score, and provides an exit value for CI systems.
-#define CONCLUDE_TESTING \
+#define CONCLUDE_TESTING do { \
     clock_gettime(CLOCK_MONOTONIC, &__tests_concluded); \
     float __runtime_s  = ((float) __tests_concluded.tv_sec  - __tests_began.tv_sec); \
     float __runtime_ns = abs(__tests_concluded.tv_nsec - __tests_began.tv_nsec); \
@@ -80,4 +82,5 @@
         __COLOR_RESET, \
         __runtime \
     ); \
-    return EXIT_FAILURE;
+    return EXIT_FAILURE; \
+    } while (0)
