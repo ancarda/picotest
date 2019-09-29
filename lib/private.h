@@ -26,7 +26,8 @@ int __assertions_succeeded = 0;
 #define __EXPAND(x) #x
 
 #define __TEST_EMPTY \
-    printf(" %s%s%s\n", __COLOR_BG_YELLOW, " No Assertions Made ", __COLOR_RESET);
+    printf(" %s%s%s\n", __COLOR_BG_YELLOW, " No Assertions Made ", __COLOR_RESET); \
+    return EXIT_SUCCESS; // Assume success since it's a warning
 
 #define __TEST_PASSED \
     printf(" %s%s%s\n", __COLOR_BG_GREEN, " OK ", __COLOR_RESET); \
