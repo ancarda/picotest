@@ -62,7 +62,7 @@ to a segmentation fault. Do not pass in pointers unless instructed.
 Simply compile with `gcc` or your favorite C compiler. You can then run the
 resulting binary. Assuming your tests were in `test/tests.c`:
 
-    gcc -fsanitize=address test/tests.c -o testrunner
+    gcc -Wall -fsanitize=address test/tests.c -o testrunner
     ./testrunner
 
 Note, if you omit `CONCLUDE_TESTING`, you will not get a summary or a return
