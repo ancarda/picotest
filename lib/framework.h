@@ -3,8 +3,10 @@
 //
 
 #include <assert.h>
+#include <math.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <time.h>
 #include "private.h"
 #include "assertions.h"
 
@@ -14,7 +16,8 @@
 #define BEGIN_TESTING \
     puts("PicoTest"); \
     puts("========"); \
-    puts("");
+    puts(""); \
+    clock_gettime(CLOCK_MONOTONIC, &__tests_began);
 
 // Defines a new test. Provide the test name, and a body (use curly braces).
 // The body should contain one or more ASSERT_xxx calls.
@@ -38,36 +41,43 @@
 // This should be used after all RUN_TEST calls in main().
 // It prints the overall score, and provides an exit value for CI systems.
 #define CONCLUDE_TESTING \
+    clock_gettime(CLOCK_MONOTONIC, &__tests_concluded); \
+    float __runtime_s  = ((float) __tests_concluded.tv_sec  - __tests_began.tv_sec); \
+    float __runtime_ns = abs(__tests_concluded.tv_nsec - __tests_began.tv_nsec); \
+    float __runtime    = ((__runtime_s * 1000000000) + __runtime_ns) / 1000000000;  \
     puts(""); \
     assert(__assertions_attempted >= __assertions_succeeded); \
     assert(__assertions_attempted >= 0); \
     assert(__assertions_succeeded >= 0); \
     assert(__tests_run >= 0); \
     if (__assertions_attempted == 0) { \
-        printf("%sNothing To Do (%d tests, %d assertions).%s\n", \
+        printf("%sNothing To Do (%d tests, %d assertions).%s Duration: %f seconds\n", \
             __COLOR_BG_YELLOW, \
             __tests_run, \
             __assertions_attempted, \
-            __COLOR_RESET \
+            __COLOR_RESET, \
+            __runtime \
         ); \
         puts("Did you include RUN_TEST(test_name) calls?"); \
         return EXIT_FAILURE; \
     } \
     if (__assertions_attempted == __assertions_succeeded) { \
-        printf("%sOK (%d tests, %d assertions).%s\n", \
+        printf("%sOK (%d tests, %d assertions).%s Duration: %f seconds\n", \
             __COLOR_BG_GREEN, \
             __tests_run, \
             __assertions_attempted, \
-            __COLOR_RESET \
+            __COLOR_RESET, \
+            __runtime \
         ); \
         return EXIT_SUCCESS; \
     } \
     printf( \
-        "%sErrors (%d out of %d assertions in %d tests).%s\n", \
+        "%sErrors (%d out of %d assertions in %d tests).%s Duration: %f seconds\n", \
         __COLOR_BG_RED, \
         __assertions_succeeded, \
         __assertions_attempted, \
         __tests_run, \
-        __COLOR_RESET \
+        __COLOR_RESET, \
+        __runtime \
     ); \
     return EXIT_FAILURE;

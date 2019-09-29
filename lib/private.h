@@ -9,10 +9,14 @@
 #pragma once
 
 #include <stdbool.h>
+#include <time.h>
 
 int __tests_run            = 0;
 int __assertions_attempted = 0;
 int __assertions_succeeded = 0;
+
+struct timespec __tests_began;
+struct timespec __tests_concluded;
 
 #define __COLOR_FG_GREEN  "\x1B[32m"
 #define __COLOR_BG_GREEN  "\x1B[42m"
