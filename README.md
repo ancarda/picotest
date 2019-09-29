@@ -56,6 +56,7 @@ to a segmentation fault. Do not pass in pointers unless instructed.
  * `ASSERT_STR_EQ(a, b)` -- uses `strcmp`, prints with `%s`.
  * `ASSERT_INT_EQ(a, b)` -- uses `==`, prints with `%d`.
  * `ASSERT_NOT_NULL(a)`  -- uses `==`, does not print anything.
+ * `ASSERT_NULL(a)`      -- uses `==`, does not print anything.
 
 ## Running The Tests
 
