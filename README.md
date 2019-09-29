@@ -12,7 +12,7 @@ exercise; [tiny-ircd](https://github.com/ancarda/tiny-ircd).
 
 IT_SHOULD(do_nothing, {
     // A test that does nothing will show up as a warning
-});
+})
 
 IT_SHOULD(pass, {
     char* a;
@@ -21,20 +21,20 @@ IT_SHOULD(pass, {
     a = "foobar";
     b = strdup(a);
 
-    ASSERT_STR_EQ(a, b);
-});
+    ASSERT_STR_EQ(a, b)
+})
 
 IT_SHOULD(fail, {
-    ASSERT_INT_EQ(1, 2);
-});
+    ASSERT_INT_EQ(1, 2)
+})
 
 int main()
 {
     BEGIN_TESTING
 
-    RUN_TEST(do_nothing);
-    RUN_TEST(pass);
-    RUN_TEST(fail);
+    RUN_TEST(do_nothing)
+    RUN_TEST(pass)
+    RUN_TEST(fail)
 
     CONCLUDE_TESTING
 }
