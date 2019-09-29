@@ -25,3 +25,10 @@
         printf("%sLine %d: ASSERT_NOT_NULL: x == NULL", __ERR_MARKER, __LINE__); \
         __ASSERTION_FAILED \
     }})
+
+// Checks that x is NULL. Suitable for anything.
+#define ASSERT_NULL(x) __TRY_ASSERT({ \
+    if (x != NULL) { \
+        printf("%sLine %d: ASSERT_NULL: x != NULL", __ERR_MARKER, __LINE__); \
+        __ASSERTION_FAILED \
+    }})
