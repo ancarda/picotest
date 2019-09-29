@@ -21,11 +21,11 @@ IT_SHOULD(pass, {
     a = "foobar";
     b = strdup(a);
 
-    ASSERT_STR_EQ(a, b)
+    ASSERT_STR_EQ(a, b);
 })
 
 IT_SHOULD(fail, {
-    ASSERT_INT_EQ(1, 2)
+    ASSERT_INT_EQ(1, 2);
 })
 
 int main()
