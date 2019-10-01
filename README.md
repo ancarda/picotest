@@ -48,7 +48,7 @@ Then, it'll do some assertions. A test should have 1 or more assertions. A
 test with zero assertions causes a warning to display on the screen, but will
 not make the test runner exit with 0.
 
-## Assertions
+### Assertions
 
 Failure messages are printed with `printf`. Using the wrong assertion can lead
 to a segmentation fault. Do not pass in pointers unless instructed.
@@ -57,6 +57,35 @@ to a segmentation fault. Do not pass in pointers unless instructed.
  * `ASSERT_INT_EQ(a, b)` -- uses `==`, prints with `%d`.
  * `ASSERT_NOT_NULL(a)`  -- uses `==`, does not print anything.
  * `ASSERT_NULL(a)`      -- uses `==`, does not print anything.
+
+### Test Suites
+
+You may want to break up your tests into logical chunks. You can do this with
+the test suite macros:
+
+```c
+int main()
+{
+    BEGIN_TESTING;
+
+    BEGIN_TEST_SUITE(Unit Testing Basics);
+        RUN_TEST(do_nothing);
+        RUN_TEST(pass);
+        RUN_TEST(fail);
+    END_TEST_SUITE;
+
+    BEGIN_TEST_SUITE(Authentication Component);
+        RUN_TEST(check_some_stuff);
+        RUN_TEST(do_another_test);
+    END_TEST_SUITE;
+
+    CONCLUDE_TESTING;
+}
+```
+
+You can, of course, put the test suite in another function, so between BEGIN
+and CONCLUDE TESTING blocks, you only have function calls for logical groups
+of tests.
 
 ## Running The Tests
 
