@@ -6,8 +6,8 @@
 
 #include <assert.h>
 #include <math.h>
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <time.h>
 #include "private.h"
 #include "assertions.h"
