@@ -2,6 +2,8 @@
 // Assertions for PicoTest.
 //
 
+#pragma once
+
 #include <string.h>
 #include "private.h"
 
