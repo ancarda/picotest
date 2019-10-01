@@ -34,10 +34,9 @@
 // The body should contain one or more ASSERT_xxx calls.
 #define IT_SHOULD(test_name, test_body) \
     int it_should_##test_name() { \
-        printf( \
-            "  it should %s:", \
-            __str_replace_byte(__EXPAND(test_name), '_', ' ') \
-        ); \
+        char* __formatted_name = __str_replace_byte(__EXPAND(test_name), '_', ' '); \
+        printf("  it should %s:", __formatted_name); \
+        free(__formatted_name); \
         int __assertions_before_this_test = __assertions_attempted; \
         test_body \
         if (__assertions_before_this_test == __assertions_attempted) { \
