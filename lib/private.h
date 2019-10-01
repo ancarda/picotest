@@ -68,16 +68,18 @@ struct timespec __tests_concluded;
     return EXIT_FAILURE; \
     } while (0)
 
-char* __str_replace_byte(char* str, char find, char replace)
+char* __str_replace_byte(const char* str, const char find, const char replace)
 {
+    char* out;
+    int   i;
+
     assert(str != NULL);
     assert(find != replace);
 
-    char* out = malloc(sizeof(char) * strlen(str) + 1);
+    out = malloc(sizeof(char) * strlen(str) + 1);
     assert(out != NULL);
 
-    int i;
-    for (i = 0; i < strlen(str); i++)
+    for (i = 0; i < (int) strlen(str); i++)
     {
         if (str[i] == find) {
             out[i] = replace;
@@ -87,7 +89,7 @@ char* __str_replace_byte(char* str, char find, char replace)
     }
 
     // Include a null terminate byte
-    out[i] = 0;
+    out[i] = '\0';
 
     return out;
 }
