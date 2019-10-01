@@ -11,9 +11,11 @@
 #include <stdbool.h>
 #include <time.h>
 
-int __tests_run            = 0;
-int __assertions_attempted = 0;
-int __assertions_succeeded = 0;
+int  __tests_run            = 0;
+int  __tests_run_in_suite   = 0;
+bool __in_test_suite        = false;
+int  __assertions_attempted = 0;
+int  __assertions_succeeded = 0;
 
 struct timespec __tests_began;
 struct timespec __tests_concluded;
@@ -25,7 +27,7 @@ struct timespec __tests_concluded;
 #define __COLOR_BG_RED    "\x1B[101m"
 #define __COLOR_RESET     "\x1B[0m"
 
-#define __ERR_MARKER "\n  \x1B[37;1m\x1B[41m ERR \x1B[0m "
+#define __ERR_MARKER "\n    \x1B[37;1m\x1B[41m ERR \x1B[0m "
 
 #define __EXPAND(x) #x
 
@@ -37,6 +39,19 @@ struct timespec __tests_concluded;
 #define __TEST_PASSED do { \
     printf(" %s%s%s\n", __COLOR_BG_GREEN, " OK ", __COLOR_RESET); \
     return EXIT_SUCCESS; \
+    } while (0)
+
+#define __SUITE_EMPTY do { \
+    printf("  %s%s%s\n", __COLOR_BG_YELLOW, " No Tests Run ", __COLOR_RESET); \
+    puts("  => Did you include a RUN_TEST(test_name); call before END_TEST_SUITE;"); \
+    } while (0)
+
+#define __CHECK_NOT_IN_TEST_SUITE \
+    do { \
+        if (__in_test_suite) { \
+            printf("%s%s%s", __COLOR_BG_YELLOW, " Test Suite Not Closed ", __COLOR_RESET); \
+            puts(" -- Call END_TEST_SUITE; before CONCLUDE_TESTING or BEGIN_TEST_SUITE!"); \
+        } \
     } while (0)
 
 #define __TRY_ASSERT(block) do { \

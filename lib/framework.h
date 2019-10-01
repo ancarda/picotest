@@ -22,6 +22,14 @@
     clock_gettime(CLOCK_MONOTONIC, &__tests_began); \
     } while (0)
 
+// Begins a test suite; a collection of tests.
+#define BEGIN_TEST_SUITE(suite_name) \
+    do { \
+        __CHECK_NOT_IN_TEST_SUITE; \
+        __in_test_suite = true; \
+        printf("%s:\n", __EXPAND(suite_name)); \
+    } while (0)
+
 // Defines a new test. Provide the test name, and a body (use curly braces).
 // The body should contain one or more ASSERT_xxx calls.
 #define IT_SHOULD(test_name, test_body) \
@@ -40,6 +48,18 @@
 #define RUN_TEST(test_name) do { \
     it_should_##test_name(); \
     __tests_run++; \
+    __tests_run_in_suite++; \
+    } while (0)
+
+// Ends a test suite.
+#define END_TEST_SUITE \
+    do { \
+        __in_test_suite = false; \
+        if (__tests_run_in_suite == 0) { \
+            __SUITE_EMPTY; \
+        } \
+        puts(""); \
+        __tests_run_in_suite = 0; \
     } while (0)
 
 // This should be used after all RUN_TEST calls in main().
@@ -54,6 +74,7 @@
     assert(__assertions_attempted >= 0); \
     assert(__assertions_succeeded >= 0); \
     assert(__tests_run >= 0); \
+    __CHECK_NOT_IN_TEST_SUITE; \
     if (__assertions_attempted == 0) { \
         printf("%sNothing To Do (%d tests, %d assertions).%s Duration: %f seconds\n", \
             __COLOR_BG_YELLOW, \
