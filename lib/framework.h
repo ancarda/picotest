@@ -34,7 +34,10 @@
 // The body should contain one or more ASSERT_xxx calls.
 #define IT_SHOULD(test_name, test_body) \
     int it_should_##test_name() { \
-        printf("it should %s:", __EXPAND(test_name)); \
+        printf( \
+            "  it should %s:", \
+            __str_replace_byte(__EXPAND(test_name), '_', ' ') \
+        ); \
         int __assertions_before_this_test = __assertions_attempted; \
         test_body \
         if (__assertions_before_this_test == __assertions_attempted) { \
@@ -67,7 +70,7 @@
 #define CONCLUDE_TESTING do { \
     clock_gettime(CLOCK_MONOTONIC, &__tests_concluded); \
     float __runtime_s  = ((float) __tests_concluded.tv_sec  - __tests_began.tv_sec); \
-    float __runtime_ns = abs(__tests_concluded.tv_nsec - __tests_began.tv_nsec); \
+    float __runtime_ns = (__tests_concluded.tv_nsec - __tests_began.tv_nsec); \
     float __runtime    = ((__runtime_s * 1000000000) + __runtime_ns) / 1000000000;  \
     puts(""); \
     assert(__assertions_attempted >= __assertions_succeeded); \

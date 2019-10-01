@@ -8,7 +8,9 @@
 
 #pragma once
 
+#include <assert.h>
 #include <stdbool.h>
+#include <stdlib.h>
 #include <time.h>
 
 int  __tests_run            = 0;
@@ -64,3 +66,27 @@ struct timespec __tests_concluded;
     puts(""); \
     return EXIT_FAILURE; \
     } while (0)
+
+char* __str_replace_byte(char* str, char find, char replace)
+{
+    assert(str != NULL);
+    assert(find != replace);
+
+    char* out = malloc(sizeof(char) * strlen(str) + 1);
+    assert(out != NULL);
+
+    int i;
+    for (i = 0; i < strlen(str); i++)
+    {
+        if (str[i] == find) {
+            out[i] = replace;
+        } else {
+            out[i] = str[i];
+        }
+    }
+
+    // Include a null terminate byte
+    out[i] = 0;
+
+    return out;
+}
