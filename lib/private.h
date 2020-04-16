@@ -46,14 +46,14 @@ struct timespec __tests_concluded;
 
 #define __SUITE_EMPTY do { \
     printf("  %s%s%s\n", __COLOR_BG_YELLOW, " No Tests Run ", __COLOR_RESET); \
-    puts("  => Did you include a RUN_TEST(test_name); call before END_TEST_SUITE;"); \
+    (void) puts("  => Did you include a RUN_TEST(test_name); call before END_TEST_SUITE;"); \
     } while (0)
 
 #define __CHECK_NOT_IN_TEST_SUITE \
     do { \
         if (__in_test_suite) { \
             printf("%s%s%s", __COLOR_BG_YELLOW, " Test Suite Not Closed ", __COLOR_RESET); \
-            puts(" -- Call END_TEST_SUITE; before CONCLUDE_TESTING or BEGIN_TEST_SUITE!"); \
+            (void) puts(" -- Call END_TEST_SUITE; before CONCLUDE_TESTING or BEGIN_TEST_SUITE!"); \
         } \
     } while (0)
 
@@ -64,7 +64,7 @@ struct timespec __tests_concluded;
     } while (0)
 
 #define __ASSERTION_FAILED do { \
-    puts(""); \
+    (void) puts(""); \
     return EXIT_FAILURE; \
     } while (0)
 
