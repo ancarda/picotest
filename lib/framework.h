@@ -18,9 +18,9 @@
 // be used to do some setup.
 #define BEGIN_TESTING \
     do { \
-        (void) puts("PicoTest"); \
-        (void) puts("========"); \
-        (void) puts(""); \
+        puts("PicoTest"); \
+        puts("========"); \
+        puts(""); \
         clock_gettime(CLOCK_MONOTONIC, &__tests_began); \
     } while (0)
 
@@ -63,7 +63,7 @@
         if (__tests_run_in_suite == 0) { \
             __SUITE_EMPTY; \
         } \
-        (void) puts(""); \
+        puts(""); \
         __tests_run_in_suite = 0; \
     } while (0)
 
@@ -74,7 +74,7 @@
     float __runtime_s  = ((float) __tests_concluded.tv_sec  - __tests_began.tv_sec); \
     float __runtime_ns = (__tests_concluded.tv_nsec - __tests_began.tv_nsec); \
     float __runtime    = ((__runtime_s * 1000000000) + __runtime_ns) / 1000000000;  \
-    (void) puts(""); \
+    puts(""); \
     assert(__assertions_attempted >= __assertions_succeeded); \
     assert(__assertions_attempted >= 0); \
     assert(__assertions_succeeded >= 0); \
@@ -88,7 +88,7 @@
             __COLOR_RESET, \
             __runtime \
         ); \
-        (void) puts("Did you include RUN_TEST(test_name) calls?"); \
+        puts("Did you include RUN_TEST(test_name) calls?"); \
         return EXIT_FAILURE; \
     } \
     if (__assertions_attempted == __assertions_succeeded) { \
