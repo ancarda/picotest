@@ -2,7 +2,8 @@
 // PicoTest Main File
 //
 
-#pragma once
+#if !defined(PICOTEST_FRAMEWORK_H)
+#define PICOTEST_FRAMEWORK_H
 
 #include <assert.h>
 #include <math.h>
@@ -111,3 +112,5 @@
     ); \
     return EXIT_FAILURE; \
     } while (0)
+
+#endif /* PICOTEST_FRAMEWORK_H */

@@ -6,7 +6,8 @@
 // is subject to change without notice between versions.
 //
 
-#pragma once
+#if !defined(PICOTEST_PRIVATE_H)
+#define PICOTEST_PRIVATE_H
 
 #include <assert.h>
 #include <stdbool.h>
@@ -93,3 +94,5 @@ char* __str_replace_byte(const char* str, const char find, const char replace)
 
     return out;
 }
+
+#endif /* PICOTEST_PRIVATE_H */

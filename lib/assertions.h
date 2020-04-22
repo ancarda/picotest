@@ -2,7 +2,8 @@
 // Assertions for PicoTest.
 //
 
-#pragma once
+#if !defined(PICOTEST_ASSERTIONS_H)
+#define PICOTEST_ASSERTIONS_H
 
 #include <string.h>
 #include "private.h"
@@ -34,3 +35,5 @@
         printf("%sLine %d: ASSERT_NULL: x != NULL", __ERR_MARKER, __LINE__); \
         __ASSERTION_FAILED; \
     }}); } while (0)
+
+#endif /* PICOTEST_ASSERTIONS_H */
