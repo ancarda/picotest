@@ -22,6 +22,20 @@
         });                                                                    \
     } while (0)
 
+// Checks that x == y. Suitable for unsigned longs such as size_t.
+#define ASSERT_ULONG_EQ(x, y)                                                  \
+    do                                                                         \
+    {                                                                          \
+        __TRY_ASSERT({                                                         \
+            if (x != y)                                                        \
+            {                                                                  \
+                printf("%sLine %d: ASSERT_ULONG_EQ: %lu != %lu", __ERR_MARKER, \
+                       __LINE__, x, y);                                        \
+                __ASSERTION_FAILED;                                            \
+            }                                                                  \
+        });                                                                    \
+    } while (0)
+
 // Checks that x == y. Suitable for strings (char*).
 #define ASSERT_STR_EQ(x, y)                                                    \
     do                                                                         \
