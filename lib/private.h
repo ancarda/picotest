@@ -6,7 +6,7 @@
 // is subject to change without notice between versions.
 //
 
-#if !defined(PICOTEST_PRIVATE_H)
+#ifndef PICOTEST_PRIVATE_H
 #define PICOTEST_PRIVATE_H
 
 #include <assert.h>

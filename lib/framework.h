@@ -2,7 +2,7 @@
 // PicoTest Main File
 //
 
-#if !defined(PICOTEST_FRAMEWORK_H)
+#ifndef PICOTEST_FRAMEWORK_H
 #define PICOTEST_FRAMEWORK_H
 
 #include <assert.h>

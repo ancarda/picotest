@@ -2,7 +2,7 @@
 // Assertions for PicoTest.
 //
 
-#if !defined(PICOTEST_ASSERTIONS_H)
+#ifndef PICOTEST_ASSERTIONS_H
 #define PICOTEST_ASSERTIONS_H
 
 #include <string.h>
