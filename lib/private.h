@@ -1,10 +1,10 @@
-//
-// PicoTest private variables and macros.
-//
-// PLEASE DO NOT USE THESE IN YOUR TESTS OR CODE
-// You may break the tests. Everything here is not part of the API scope and
-// is subject to change without notice between versions.
-//
+/**
+ * PicoTest private variables and macros.
+ *
+ * PLEASE DO NOT USE THESE IN YOUR TESTS OR CODE
+ * You may break the tests. Everything here is not part of the API scope and
+ * is subject to change without notice between versions.
+ */
 
 #ifndef PICOTEST_PRIVATE_H
 #define PICOTEST_PRIVATE_H

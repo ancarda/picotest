@@ -53,11 +53,11 @@ not make the test runner exit with 0.
 Failure messages are printed with `printf`. Using the wrong assertion can lead
 to a segmentation fault. Do not pass in pointers unless instructed.
 
- * `ASSERT_STR_EQ(a, b)`   -- uses `strcmp`, prints with `%s`.
+ * `ASSERT_STR_EQ(*a, *b)` -- uses `strcmp`, prints with `%s`.
  * `ASSERT_INT_EQ(a, b)`   -- uses `==`, prints with `%d`.
  * `ASSERT_ULONG_EQ(a, b)` -- uses `==`, prints with `%lu`.
- * `ASSERT_NOT_NULL(a)`    -- uses `==`, does not print anything.
- * `ASSERT_NULL(a)`        -- uses `==`, does not print anything.
+ * `ASSERT_NOT_NULL(*a)`   -- uses `==`, does not print anything.
+ * `ASSERT_NULL(*a)`       -- uses `==`, does not print anything.
 
 ### Test Suites
 

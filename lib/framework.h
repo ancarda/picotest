@@ -1,6 +1,9 @@
-//
-// PicoTest Main File
-//
+/**
+ * PicoTest Framework
+ *
+ * You should include this file, and only this file, for normal usage.
+ * Do not include assertions.h
+ */
 
 #ifndef PICOTEST_FRAMEWORK_H
 #define PICOTEST_FRAMEWORK_H
@@ -13,9 +16,12 @@
 #include <stdlib.h>
 #include <time.h>
 
-// This should be at the start of your main function.
-// Right now it just prints the PicoTest header, but could in the future
-// be used to do some setup.
+/**
+ * Initialize PicoTest
+ *
+ * This should be at the very start of main, and run before any test suite or
+ * tests.
+ */
 #define BEGIN_TESTING                                                          \
     do                                                                         \
     {                                                                          \
@@ -25,7 +31,9 @@
         clock_gettime(CLOCK_MONOTONIC, &__tests_began);                        \
     } while (0)
 
-// Begins a test suite; a collection of tests.
+/**
+ * Begins a test suite; a collection of tests.
+ */
 #define BEGIN_TEST_SUITE(suite_name)                                           \
     do                                                                         \
     {                                                                          \
@@ -34,8 +42,14 @@
         printf("%s:\n", __EXPAND(suite_name));                                 \
     } while (0)
 
-// Defines a new test. Provide the test name, and a body (use curly braces).
-// The body should contain one or more ASSERT_xxx calls.
+/**
+ * Defines a new test. Provide the test name, and a body (use curly braces).
+ * The body should contain one or more ASSERT_xxx calls.
+ *
+ * The test name should have underscores rather than spaces since it will
+ * become a C function. Underscores will be replaced with spaces when the test
+ * name is printed.
+ */
 #define IT_SHOULD(test_name, test_body)                                        \
     int it_should_##test_name()                                                \
     {                                                                          \
@@ -51,8 +65,12 @@
         __TEST_PASSED;                                                         \
     }
 
-// This should be used after BEGIN_TESTING in main().
-// The name is the same as you provided to IT_SHOULD.
+/**
+ * Execute a previously defined test.
+ *
+ * This should be used after BEGIN_TESTING in main(). The name is the same as
+ * you provided to IT_SHOULD, complete with underscores if present.
+ */
 #define RUN_TEST(test_name)                                                    \
     do                                                                         \
     {                                                                          \
@@ -61,7 +79,11 @@
         __tests_run_in_suite++;                                                \
     } while (0)
 
-// Ends a test suite.
+/**
+ * End a test suite.
+ *
+ * To be called after BEGIN_TEST_SUITE and 1 or more RUN_TEST calls.
+ */
 #define END_TEST_SUITE                                                         \
     do                                                                         \
     {                                                                          \
@@ -74,8 +96,14 @@
         __tests_run_in_suite = 0;                                              \
     } while (0)
 
-// This should be used after all RUN_TEST calls in main().
-// It prints the overall score, and provides an exit value for CI systems.
+/**
+ * Print an overall score and return an exit value for CI systems.
+ *
+ * To be used after all RUN_TEST calls in main().
+ *
+ * Exit value is given via `return` so this macro call should be in `main()`,
+ * or the value should be captured and then returned from main.
+ */
 #define CONCLUDE_TESTING                                                       \
     do                                                                         \
     {                                                                          \
