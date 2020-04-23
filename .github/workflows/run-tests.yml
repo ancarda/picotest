@@ -4,12 +4,9 @@ on: [push]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-    
+
     steps:
     - uses: actions/checkout@v1
-    - name: build
-      run: gcc -Wall -fsanitize=address test/tests.c -o testrunner
     - name: test
-      run: ./testrunner
+      run: make
