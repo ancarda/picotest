@@ -1,3 +1,5 @@
+/* SPDX-License-Identifier: AGPL-3.0-or-later */
+
 #include "../lib/framework.h"
 
 IT_SHOULD(do_nothing_when_replacing_bytes_in_an_empty_string, {
