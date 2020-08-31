@@ -1,6 +1,7 @@
 # ancarda/picotest
 
 [![License](https://img.shields.io/github/license/ancarda/picotest.svg)](https://choosealicense.com/licenses/agpl-3.0/)
+[![builds.sr.ht status](https://builds.sr.ht/~ancarda/picotest.svg)](https://builds.sr.ht/~ancarda/picotest)
 
 PicoTest was written as a learning exercise and is not meant to be a serious
 testing framework.
