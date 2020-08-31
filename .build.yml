@@ -1,0 +1,16 @@
+---
+image: debian/stable
+
+sources:
+  - https://git.sr.ht/~ancarda/picotest
+
+environment:
+  CC: gcc
+
+tasks:
+  - info: |
+      $CC --version
+      make --version
+  - test: |
+      cd picotest
+      make check
