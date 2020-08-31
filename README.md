@@ -1,4 +1,4 @@
-# ancarda/picotest
+# PicoTest
 
 [![License](https://img.shields.io/badge/License-AGPL--3.0--or--later-teal)](https://choosealicense.com/licenses/agpl-3.0/)
 [![builds.sr.ht status](https://builds.sr.ht/~ancarda/picotest.svg)](https://builds.sr.ht/~ancarda/picotest)
