@@ -8,4 +8,4 @@ check:
 	$(RM) testrunner
 
 format:
-	clang-format -i lib/*.{c,h} test/*.{c,h}
+	clang-format -i lib/*.h test/*.c
