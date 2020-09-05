@@ -1,0 +1,19 @@
+---
+image: debian/stable
+
+sources:
+  - https://git.sr.ht/~ancarda/picotest
+
+packages:
+  - clang
+
+environment:
+  CC: clang
+
+tasks:
+  - info: |
+      $CC --version
+      make --version
+  - test: |
+      cd picotest
+      make check
