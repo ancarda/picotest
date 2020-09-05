@@ -6,6 +6,14 @@
 PicoTest was written as a learning exercise and is not meant to be a serious
 testing framework.
 
+## Useful Links
+
+* Source Code:   <https://git.sr.ht/~ancarda/picotest/>
+* Issue Tracker: <https://todo.sr.ht/~ancarda/picotest/>
+* Mailing List:  <https://lists.sr.ht/~ancarda/public-inbox/>
+
+See the CONTRIBUTING file for more information.
+
 ## Example Usage
 
 ```c
