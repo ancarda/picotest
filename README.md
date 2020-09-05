@@ -1,6 +1,7 @@
 # PicoTest
 
-[![License](https://img.shields.io/badge/License-AGPL--3.0--or--later-teal)](https://choosealicense.com/licenses/agpl-3.0/)
+[![License](https://img.shields.io/badge/license-AGPL--3.0--or--later-teal)](https://choosealicense.com/licenses/agpl-3.0/)
+[![Builds with ANSI C](https://img.shields.io/badge/std-c89-blue)](https://en.wikipedia.org/wiki/ANSI_C)
 [![builds.sr.ht status](https://builds.sr.ht/~ancarda/picotest.svg)](https://builds.sr.ht/~ancarda/picotest)
 
 PicoTest was written as a learning exercise and is not meant to be a serious

@@ -1,4 +1,6 @@
-CFLAGS?=-Wall -Werror -fsanitize=address
+.POSIX:
+
+CFLAGS?=-ansi -Werror -Wpedantic -fsanitize=address
 
 all: check
 

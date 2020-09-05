@@ -10,6 +10,8 @@
 #ifndef PICOTEST_FRAMEWORK_H
 #define PICOTEST_FRAMEWORK_H
 
+#define _POSIX_C_SOURCE 199309L
+
 #include "assertions.h"
 #include "private.h"
 #include <assert.h>
@@ -55,11 +57,13 @@
 #define IT_SHOULD(test_name, test_body)                                        \
     int it_should_##test_name()                                                \
     {                                                                          \
-        char* __formatted_name =                                               \
-            __str_replace_byte(__EXPAND(test_name), '_', ' ');                 \
+        int __assertions_before_this_test;                                     \
+        char* __formatted_name;                                                \
+                                                                               \
+        __formatted_name = __str_replace_byte(__EXPAND(test_name), '_', ' ');  \
         printf("  it should %s:", __formatted_name);                           \
         free(__formatted_name);                                                \
-        int __assertions_before_this_test = __assertions_attempted;            \
+        __assertions_before_this_test = __assertions_attempted;                \
         test_body if (__assertions_before_this_test == __assertions_attempted) \
         {                                                                      \
             __TEST_EMPTY;                                                      \
@@ -109,13 +113,15 @@
 #define CONCLUDE_TESTING                                                       \
     do                                                                         \
     {                                                                          \
+        float __runtime;                                                       \
+        float __runtime_s;                                                     \
+        float __runtime_ns;                                                    \
+                                                                               \
         clock_gettime(CLOCK_MONOTONIC, &__tests_concluded);                    \
-        float __runtime_s =                                                    \
+        __runtime_s =                                                          \
             ((float) __tests_concluded.tv_sec - __tests_began.tv_sec);         \
-        float __runtime_ns =                                                   \
-            (__tests_concluded.tv_nsec - __tests_began.tv_nsec);               \
-        float __runtime =                                                      \
-            ((__runtime_s * 1000000000) + __runtime_ns) / 1000000000;          \
+        __runtime_ns = (__tests_concluded.tv_nsec - __tests_began.tv_nsec);    \
+        __runtime = ((__runtime_s * 1000000000) + __runtime_ns) / 1000000000;  \
         puts("");                                                              \
         assert(__assertions_attempted >= __assertions_succeeded);              \
         assert(__assertions_attempted >= 0);                                   \

@@ -110,7 +110,7 @@ char* __str_replace_byte(const char* str, const char find, const char replace)
         }
     }
 
-    // Include a null terminate byte
+    /* Include a null terminate byte */
     out[i] = '\0';
 
     return out;
